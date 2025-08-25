@@ -172,7 +172,3 @@ infrastructure-monitoring/
 - Time-series database concepts
 - Infrastructure monitoring fundamentals
 - Kubernetes metrics and observability
-
----
-
-**Note**: This is a learning project focused on architectural patterns. Start simple, iterate frequently, and prioritize clean separation of concerns over feature completeness.
