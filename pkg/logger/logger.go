@@ -151,7 +151,7 @@ func new(w io.Writer, minLevel Level, serviceName string, traceIDFn TraceIDFn, e
 		return a
 	}
 
-	// Construct the slog JSON hangler
+	// Construct the slog JSON handler
 	handler := slog.Handler(slog.NewJSONHandler(w, &slog.HandlerOptions{AddSource: true, Level: slog.Level(minLevel), ReplaceAttr: f}))
 
 	// If events are to be processed, wrap the JSON handler around the custom

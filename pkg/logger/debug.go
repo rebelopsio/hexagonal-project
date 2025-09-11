@@ -33,6 +33,8 @@ func (log *Logger) BuildInfo(ctx context.Context) {
 
 	values = append(values, "goversion", info.GoVersion)
 	values = append(values, "modversion", info.Main.Version)
+
+	log.Info(ctx, "build info", values...)
 }
 
 // quoteKey reports whether key is required to be quoted
