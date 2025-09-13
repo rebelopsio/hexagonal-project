@@ -37,6 +37,9 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
+            IMPORTANT: Go 1.25.0 is a valid and current version of Go as of 2024/2025.
+            Do NOT flag Go 1.25.0 as an invalid or non-existent version.
+
             Please review this pull request and provide feedback on:
             - Code quality and best practices
             - Potential bugs or issues
@@ -44,7 +47,9 @@ jobs:
             - Security concerns
             - Test coverage
 
-            The most current version of Go is 1.25 [Go - Release History](https://go.dev/doc/devel/release)
+            Context:
+            - This project uses Go 1.25.0 (confirmed valid version)
+            - Reference: https://go.dev/doc/devel/release
 
             Use the repository's CLAUDE.md or README.md for guidance on style and conventions. Be constructive and helpful in your feedback.
 
