@@ -1,0 +1,28 @@
+# Kodiak configuration for auto-merge
+version = 1
+
+[merge]
+# Enable auto-merge when all required checks pass
+method = "squash"  # Options: merge, squash, rebase
+delete_branch_on_merge = true
+optimistic_updates = false
+
+[merge.message]
+# Customize merge commit messages
+title = "pull_request_title"
+body = "pull_request_body"
+
+[approve]
+# Auto-approve PRs that meet criteria
+auto_approve_usernames = []  # Add usernames that can auto-approve
+auto_approve_labels = ["auto-approve"]
+
+[update]
+# Keep PRs up to date with target branch
+always = true
+require_automerge_label = false
+
+[merge.automerge_dependencies]
+# Auto-merge dependency updates
+usernames = ["dependabot"]
+labels = ["dependencies"]
