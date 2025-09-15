@@ -23,6 +23,13 @@ type Logger struct {
 	traceIDFn TraceIDFn
 }
 
+// Caller stack depths for different logging scenarios
+const (
+	callerDepthDirect  = 3 // For direct logger method calls (Debug, Info, Warn, Error)
+	callerDepthWrapped = 4 // For when logging through a wrapper function
+	callerDepthService = 5 // For when logging through service layer methods
+)
+
 // New constructs a new log for application use
 func New(w io.Writer, minLevel Level, serviceName string, traceIDFn TraceIDFn) *Logger {
 	return new(w, minLevel, serviceName, traceIDFn, Events{})
@@ -50,7 +57,7 @@ func (log *Logger) Debug(ctx context.Context, msg string, args ...any) {
 		return
 	}
 
-	log.write(ctx, LevelDebug, 3, msg, args...)
+	log.write(ctx, LevelDebug, callerDepthDirect, msg, args...)
 }
 
 // Debugc logs the information at the specified call stack position
@@ -68,7 +75,7 @@ func (log *Logger) Info(ctx context.Context, msg string, args ...any) {
 		return
 	}
 
-	log.write(ctx, LevelInfo, 3, msg, args...)
+	log.write(ctx, LevelInfo, callerDepthDirect, msg, args...)
 }
 
 // Infoc logs the information at the specified call stack position.
@@ -86,7 +93,7 @@ func (log *Logger) Warn(ctx context.Context, msg string, args ...any) {
 		return
 	}
 
-	log.write(ctx, LevelWarn, 3, msg, args...)
+	log.write(ctx, LevelWarn, callerDepthDirect, msg, args...)
 }
 
 // Warnc logs the information at the specified call stack position.
