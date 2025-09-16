@@ -18,6 +18,7 @@ RUN addgroup -g 1000 -S api && \
 COPY --from=build_api --chown=api:api /service/cmd/api/api /service/api
 WORKDIR /service
 USER api
+# TODO: Add healthcheck to api binary
 CMD ["./api"]
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
