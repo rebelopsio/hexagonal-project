@@ -1,7 +1,16 @@
 # ==============================================================================
 # Define dependencies
 
-GOLANG := golang:1.25
+GOLANG 			:= golang:1.25
+ALPINE          := alpine:3.22
+KIND            := kindest/node:v1.33.1
+
+KIND_CLUSTER    := hexagonal-project-cluster
+NAMESPACE       := sales-system
+API_APP       	:= api
+BASE_IMAGE_NAME := localhost/hexagonal-project
+VERSION         := 0.0.1
+API_IMAGE     	:= $(BASE_IMAGE_NAME)/$(API_APP):$(VERSION)
 
 # ==============================================================================
 # Install dependencies
@@ -23,6 +32,19 @@ dev-brew:
 
 dev-docker:
 	docker pull $(GOLANG)
+
+# ==============================================================================
+# Building containers
+
+build: api
+
+api:
+	docker build \
+		-f configs/docker/Dockerfile \
+		-t $(API_IMAGE) \
+		--build-arg BUILD_REF=$(VERSION) \
+		--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+		.
 
 # ==============================================================================
 # Running tests within the local computer
